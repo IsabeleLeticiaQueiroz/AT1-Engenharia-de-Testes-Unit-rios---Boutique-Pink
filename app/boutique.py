@@ -10,7 +10,6 @@ LIMITE_FAIXA_15 = 500.00
 
 def _validar_valor_positivo(valor: float, nome: str) -> float:
     """Valida que o valor e numerico (int ou float), finito e maior que zero (RN01 e RN09)."""
-    # bool e subclasse de int, por isso precisa ser checado antes
     if isinstance(valor, bool) or not isinstance(valor, (int, float)):
         raise TypeError(f"{nome} deve ser numerico (int ou float).")
     if not math.isfinite(valor):

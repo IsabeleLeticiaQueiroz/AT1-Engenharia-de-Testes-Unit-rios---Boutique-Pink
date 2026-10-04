@@ -8,7 +8,6 @@ from app.boutique import (
 )
 
 
-# ============================ RN01 / RN09: validar_preco ============================
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "preco, esperado",
@@ -17,12 +16,9 @@ from app.boutique import (
 )
 def test_validar_preco_aceita_valores_validos(preco, esperado):
     """RN01: precos numericos, finitos e maiores que zero sao aceitos."""
-    # Arrange: dados vindos do parametrize
 
-    # Act
     resultado = validar_preco(preco)
 
-    # Assert
     assert resultado == esperado
     assert isinstance(resultado, float)
 
@@ -35,14 +31,11 @@ def test_validar_preco_aceita_valores_validos(preco, esperado):
 )
 def test_validar_preco_rejeita_entradas_invalidas(preco, excecao):
     """RN01 e RN09: valor invalido levanta ValueError; tipo incorreto levanta TypeError."""
-    # Arrange: entrada invalida e excecao esperada vindas do parametrize
 
-    # Act / Assert
     with pytest.raises(excecao):
         validar_preco(preco)
 
 
-# ========================== RN02 / RN09: validar_quantidade ==========================
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "quantidade",
@@ -51,12 +44,9 @@ def test_validar_preco_rejeita_entradas_invalidas(preco, excecao):
 )
 def test_validar_quantidade_aceita_limites_validos(quantidade):
     """RN02: quantidades 1 e 50 sao aceitas (BVA nas bordas validas)."""
-    # Arrange: dado vindo do parametrize
 
-    # Act
     resultado = validar_quantidade(quantidade)
 
-    # Assert
     assert resultado == quantidade
 
 
@@ -68,14 +58,11 @@ def test_validar_quantidade_aceita_limites_validos(quantidade):
 )
 def test_validar_quantidade_rejeita_entradas_invalidas(quantidade, excecao):
     """RN02 e RN09: fora de 1 a 50 levanta ValueError; tipo incorreto levanta TypeError."""
-    # Arrange: entrada invalida e excecao esperada vindas do parametrize
 
-    # Act / Assert
     with pytest.raises(excecao):
         validar_quantidade(quantidade)
 
 
-# =========================== RN03: calcular_subtotal ===========================
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "preco, quantidade, esperado",
@@ -84,12 +71,9 @@ def test_validar_quantidade_rejeita_entradas_invalidas(quantidade, excecao):
 )
 def test_calcular_subtotal_multiplica_e_arredonda(preco, quantidade, esperado):
     """RN03: subtotal = preco x quantidade, arredondado a 2 casas decimais."""
-    # Arrange: dados vindos do parametrize
 
-    # Act
     resultado = calcular_subtotal(preco, quantidade)
 
-    # Assert
     assert resultado == esperado
 
 
@@ -101,24 +85,19 @@ def test_calcular_subtotal_multiplica_e_arredonda(preco, quantidade, esperado):
 )
 def test_calcular_subtotal_rejeita_entradas_invalidas(preco, quantidade, excecao):
     """RN09: entradas invalidas fazem o subtotal levantar a excecao correta."""
-    # Arrange: entradas invalidas e excecao esperada vindas do parametrize
 
-    # Act / Assert
     with pytest.raises(excecao):
         calcular_subtotal(preco, quantidade)
 
 
-# ================== RN04 a RN07: calcular_percentual_desconto ==================
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "subtotal, esperado",
     [
-        # Particionamento de Equivalencia (um valor tipico de cada faixa)
         (50.00, 0.00),
         (200.00, 0.05),
         (400.00, 0.10),
         (800.00, 0.15),
-        # Analise do Valor Limite (bordas das faixas extremas e da primeira troca)
         (99.99, 0.00),
         (100.00, 0.05),
         (499.99, 0.10),
@@ -137,12 +116,9 @@ def test_calcular_subtotal_rejeita_entradas_invalidas(preco, quantidade, excecao
 )
 def test_calcular_percentual_desconto_por_faixa(subtotal, esperado):
     """RN04 a RN07: percentual de desconto correto em cada faixa e nas fronteiras."""
-    # Arrange: dados vindos do parametrize
 
-    # Act
     resultado = calcular_percentual_desconto(subtotal)
 
-    # Assert
     assert resultado == esperado
 
 
@@ -154,14 +130,11 @@ def test_calcular_percentual_desconto_por_faixa(subtotal, esperado):
 )
 def test_calcular_percentual_desconto_rejeita_entradas_invalidas(subtotal, excecao):
     """RN09: subtotal invalido levanta ValueError; tipo incorreto levanta TypeError."""
-    # Arrange: entrada invalida e excecao esperada vindas do parametrize
 
-    # Act / Assert
     with pytest.raises(excecao):
         calcular_percentual_desconto(subtotal)
 
 
-# ===================== RN08: calcular_valor_final =====================
 @pytest.mark.unit
 @pytest.mark.parametrize(
     "preco, quantidade, esperado",
@@ -170,12 +143,9 @@ def test_calcular_percentual_desconto_rejeita_entradas_invalidas(subtotal, excec
 )
 def test_calcular_valor_final_aplica_desconto_correto(preco, quantidade, esperado):
     """RN08: valor final = subtotal - desconto, arredondado a 2 casas."""
-    # Arrange: dados vindos do parametrize
 
-    # Act
     resultado = calcular_valor_final(preco, quantidade)
 
-    # Assert
     assert resultado == esperado
 
 
@@ -187,8 +157,6 @@ def test_calcular_valor_final_aplica_desconto_correto(preco, quantidade, esperad
 )
 def test_calcular_valor_final_rejeita_entradas_invalidas(preco, quantidade, excecao):
     """RN09: entradas invalidas levantam a excecao correta no calculo final."""
-    # Arrange: entradas invalidas e excecao esperada vindas do parametrize
 
-    # Act / Assert
     with pytest.raises(excecao):
         calcular_valor_final(preco, quantidade)
