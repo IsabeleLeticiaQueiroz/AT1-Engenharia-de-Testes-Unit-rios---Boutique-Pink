@@ -47,11 +47,11 @@ A Boutique Pink é um sistema simples de cálculo de compras de uma loja de roup
 
 ## 5. Critérios de aceite
 
-* [ ] Calcular corretamente o subtotal.
-* [ ] Aplicar o desconto correspondente ao valor da compra.
-* [ ] Retornar o valor final com o desconto aplicado.
-* [ ] Rejeitar preços iguais ou inferiores a zero.
-* [ ] Rejeitar quantidades inválidas.
-* [ ] Todos os testes unitários devem passar.
-* [ ] `uv run pytest -v` com todos os testes passando.
-* [ ] `uv run pytest --cov=app --cov-branch --cov-report=term-missing` com 100% de linhas e ramos.
+* [x] Calcular corretamente o subtotal.
+* [x] Aplicar o desconto correspondente ao valor da compra.
+* [x] Retornar o valor final com o desconto aplicado.
+* [x] Rejeitar preços iguais ou inferiores a zero.
+* [x] Rejeitar quantidades inválidas.
+* [x] Todos os testes unitários devem passar.
+* [x] `uv run pytest -v` com todos os testes passando.
+* [x] `uv run pytest --cov=app --cov-branch --cov-report=term-missing` com 100% de linhas e ramos.

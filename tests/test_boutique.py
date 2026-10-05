@@ -16,9 +16,13 @@ from app.boutique import (
 )
 def test_validar_preco_aceita_valores_validos(preco, esperado):
     """RN01: precos numericos, finitos e maiores que zero sao aceitos."""
+    # Arrange
+    valor = preco
 
-    resultado = validar_preco(preco)
+    # Act
+    resultado = validar_preco(valor)
 
+    # Assert
     assert resultado == esperado
     assert isinstance(resultado, float)
 
@@ -31,9 +35,14 @@ def test_validar_preco_aceita_valores_validos(preco, esperado):
 )
 def test_validar_preco_rejeita_entradas_invalidas(preco, excecao):
     """RN01 e RN09: valor invalido levanta ValueError; tipo incorreto levanta TypeError."""
+    # Arrange
+    valor = preco
 
+    # Act
     with pytest.raises(excecao):
-        validar_preco(preco)
+        validar_preco(valor)
+
+    # Assert
 
 
 @pytest.mark.unit
@@ -44,10 +53,14 @@ def test_validar_preco_rejeita_entradas_invalidas(preco, excecao):
 )
 def test_validar_quantidade_aceita_limites_validos(quantidade):
     """RN02: quantidades 1 e 50 sao aceitas (BVA nas bordas validas)."""
+    # Arrange
+    valor = quantidade
 
-    resultado = validar_quantidade(quantidade)
+    # Act
+    resultado = validar_quantidade(valor)
 
-    assert resultado == quantidade
+    # Assert
+    assert resultado == valor
 
 
 @pytest.mark.unit
@@ -58,9 +71,14 @@ def test_validar_quantidade_aceita_limites_validos(quantidade):
 )
 def test_validar_quantidade_rejeita_entradas_invalidas(quantidade, excecao):
     """RN02 e RN09: fora de 1 a 50 levanta ValueError; tipo incorreto levanta TypeError."""
+    # Arrange
+    valor = quantidade
 
+    # Act
     with pytest.raises(excecao):
-        validar_quantidade(quantidade)
+        validar_quantidade(valor)
+
+    # Assert
 
 
 @pytest.mark.unit
@@ -71,9 +89,14 @@ def test_validar_quantidade_rejeita_entradas_invalidas(quantidade, excecao):
 )
 def test_calcular_subtotal_multiplica_e_arredonda(preco, quantidade, esperado):
     """RN03: subtotal = preco x quantidade, arredondado a 2 casas decimais."""
+    # Arrange
+    valor_preco = preco
+    valor_quantidade = quantidade
 
-    resultado = calcular_subtotal(preco, quantidade)
+    # Act
+    resultado = calcular_subtotal(valor_preco, valor_quantidade)
 
+    # Assert
     assert resultado == esperado
 
 
@@ -85,9 +108,15 @@ def test_calcular_subtotal_multiplica_e_arredonda(preco, quantidade, esperado):
 )
 def test_calcular_subtotal_rejeita_entradas_invalidas(preco, quantidade, excecao):
     """RN09: entradas invalidas fazem o subtotal levantar a excecao correta."""
+    # Arrange
+    valor_preco = preco
+    valor_quantidade = quantidade
 
+    # Act
     with pytest.raises(excecao):
-        calcular_subtotal(preco, quantidade)
+        calcular_subtotal(valor_preco, valor_quantidade)
+
+    # Assert
 
 
 @pytest.mark.unit
@@ -116,9 +145,13 @@ def test_calcular_subtotal_rejeita_entradas_invalidas(preco, quantidade, excecao
 )
 def test_calcular_percentual_desconto_por_faixa(subtotal, esperado):
     """RN04 a RN07: percentual de desconto correto em cada faixa e nas fronteiras."""
+    # Arrange
+    valor = subtotal
 
-    resultado = calcular_percentual_desconto(subtotal)
+    # Act
+    resultado = calcular_percentual_desconto(valor)
 
+    # Assert
     assert resultado == esperado
 
 
@@ -130,9 +163,14 @@ def test_calcular_percentual_desconto_por_faixa(subtotal, esperado):
 )
 def test_calcular_percentual_desconto_rejeita_entradas_invalidas(subtotal, excecao):
     """RN09: subtotal invalido levanta ValueError; tipo incorreto levanta TypeError."""
+    # Arrange
+    valor = subtotal
 
+    # Act
     with pytest.raises(excecao):
-        calcular_percentual_desconto(subtotal)
+        calcular_percentual_desconto(valor)
+
+    # Assert
 
 
 @pytest.mark.unit
@@ -143,9 +181,14 @@ def test_calcular_percentual_desconto_rejeita_entradas_invalidas(subtotal, excec
 )
 def test_calcular_valor_final_aplica_desconto_correto(preco, quantidade, esperado):
     """RN08: valor final = subtotal - desconto, arredondado a 2 casas."""
+    # Arrange
+    valor_preco = preco
+    valor_quantidade = quantidade
 
-    resultado = calcular_valor_final(preco, quantidade)
+    # Act
+    resultado = calcular_valor_final(valor_preco, valor_quantidade)
 
+    # Assert
     assert resultado == esperado
 
 
@@ -157,6 +200,12 @@ def test_calcular_valor_final_aplica_desconto_correto(preco, quantidade, esperad
 )
 def test_calcular_valor_final_rejeita_entradas_invalidas(preco, quantidade, excecao):
     """RN09: entradas invalidas levantam a excecao correta no calculo final."""
+    # Arrange
+    valor_preco = preco
+    valor_quantidade = quantidade
 
+    # Act
     with pytest.raises(excecao):
-        calcular_valor_final(preco, quantidade)
+        calcular_valor_final(valor_preco, valor_quantidade)
+
+    # Assert
